@@ -119,7 +119,7 @@ class CameraRollPicker extends Component {
         renderFooter={this._renderFooterSpinner.bind(this)}
         onEndReached={this._onEndReached.bind(this)}
         dataSource={dataSource}
-        renderRow={rowData => this._renderRow(rowData)} />
+        renderRow={rowData => this._renderRow.bind(this, rowData)} />
     ) : (
       <Text style={[{textAlign: 'center'}, emptyTextStyle]}>{emptyText}</Text>
     );
@@ -162,6 +162,8 @@ class CameraRollPicker extends Component {
     var items = rowData.map((item) => {
       if (item === null) {
         return null;
+      } else if (iteem === 'customer_button') {
+        return this.props.customButton;
       }
       return this._renderImage(item);
     });
@@ -216,6 +218,10 @@ class CameraRollPicker extends Component {
   _nEveryRow(data, n) {
     var result = [],
         temp = [];
+    
+    if (this.props.customButton) {
+      temp.push('customer_button')
+    }
 
     for (var i = 0; i < data.length; ++i) {
       if (i > 0 && i % n === 0) {
@@ -292,6 +298,7 @@ CameraRollPicker.propTypes = {
   emptyText: PropTypes.string,
   emptyTextStyle: Text.propTypes.style,
   loader: PropTypes.node,
+  customButton: PropTypes.element,
 }
 
 CameraRollPicker.defaultProps = {
