@@ -224,7 +224,7 @@ class CameraRollPicker extends Component {
     }
 
     for (var i = 0; i < data.length; ++i) {
-      if (i > 0 && i % n === 0) {
+      if (temp.length === n) {
         result.push(temp);
         temp = [];
       }
