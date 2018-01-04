@@ -162,7 +162,7 @@ class CameraRollPicker extends Component {
     var items = rowData.map((item) => {
       if (item === null) {
         return null;
-      } else if (iteem === 'customer_button') {
+      } else if (item === 'customer_button') {
         return this.props.customButton;
       }
       return this._renderImage(item);
